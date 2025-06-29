@@ -6,8 +6,12 @@
     display: flex;
     justify-content: space-between;
 }
-.h1{
+.logo{
+    font-size: 32px;
    color:#484848;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 16px 0;
 }
 .menu{
     list-style: none;
@@ -33,10 +37,9 @@
     background: black;
     transition: width 0.3s ease;
 }
-.menu_item:last-of-type{
+.menu_item_last {
     margin-right: 64px;
 }
-
 .menu_item:hover::before {
     width: 100%;
 }

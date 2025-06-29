@@ -1,0 +1,77 @@
+.filters {
+    width: 300px;
+}
+
+.sizes{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.size{
+    color:#8A8A8A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: solid #8A8A8A 1px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all ease 0.4s;
+}
+.size:hover{
+    border: solid #000 1px;
+    color: #ffffff;
+    background-color: #000000;
+}
+.colors{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.color{
+    border-radius: 50%;
+    width:30px;
+    height:30px;
+    cursor: pointer;
+    transition: all ease 0.4s;
+}
+.color:hover{
+    scale: 1.2;
+}
+.color1{
+    background-color: #FF6C6C;
+}
+.color2{
+    background-color:#FF7629 ;
+}
+.color3{
+    background-color:#FFF06C ;
+}
+.color4{
+    background-color:#9BFF6C ;
+}
+.color5{
+    background-color:#6CF6FF ;
+}
+.color6{
+    background-color:#6CFFDC ;
+}
+.color7{
+    background-color:#6CB9FF ;
+}
+.color8{
+    background-color:#6C7BFF ;
+}
+.color9{
+    background-color:#B66CFF ;
+}
+.color10{
+     background-color:#FC6CFF ;
+ }
+
+.type{
+    cursor: pointer;
+}

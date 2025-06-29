@@ -1,35 +1,26 @@
 
 import classes from "./shop_page.module.css"
 import {getProducts} from "@/lib/products";
-const Page = async () => {
-    const products = await getProducts();
-
+import Filters from "@/components/shop_components/Filters";
+import Products from "@/components/shop_components/Products";
+const Page = () => {
 
 
 
     return (
         <>
-
-            <ul className="products">
-                {products.map((product) => (
-                    <li key={product.id}>
-                        {product.name}: {product.price}
-                    </li>
-                ))}
-            </ul>
-        <h1>
-           Fashion
+        <h1 className={classes.h1}>
+           Shop
         </h1>
-            <div>
-                <div className={classes.filters}>
-
-                </div>
-                <div className={classes.products}>
-
-                </div>
+            <div className={classes.container}>
+            <div className={classes.items}>
+                <Filters/>
+                <Products/>
             </div>
+
             <div className={classes.navi}>
 
+            </div>
             </div>
             </>
     );

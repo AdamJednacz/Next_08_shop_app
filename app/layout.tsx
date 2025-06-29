@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-
+import LayoutWrapper from "@/components/LayoutWrapper";
 import "./globals.css";
 import Header from "@/components/design components/Header";
-
 
 
 export const metadata: Metadata = {
@@ -15,12 +14,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+
   return (
-    <html lang="en">
+      <html lang="en">
       <body>
-      <Header />
-        {children}
+      <LayoutWrapper>{children}</LayoutWrapper>
       </body>
-    </html>
+      </html>
   );
 }
