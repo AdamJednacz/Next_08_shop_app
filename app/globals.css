@@ -78,3 +78,18 @@ button{
     letter-spacing: 1px;
     margin: 10px;
 }
+.img_2,.img_3{
+    transition: all ease 0.5s ;
+}
+.img_2:hover,.img_3:hover{
+    transform: scale(1.05);
+}
+.grid-item:nth-of-type(1),.grid-item:nth-of-type(3){
+    transition: all ease 0.5s ;
+}
+
+
+.grid-item:nth-of-type(1):hover,.grid-item:nth-of-type(3):hover{
+    transform: scale(1.05)
+
+}

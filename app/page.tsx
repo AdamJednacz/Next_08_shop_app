@@ -10,7 +10,7 @@ export default function Page() {
             <div className="grid-container">
                 <div className="grid-item item_1"><img src="/men.png" alt="men" /></div>
                 <div className="grid-item item_2">
-                    <img className="img_2" src="/woman_2.png" alt="woman" />
+                    <img className="img_2 " src="/woman_2.png" alt="woman" />
                     <h1 className="title">ULTIMATE</h1>
                     <h2 className="outline">SALE</h2>
                     <p className="subtitle">NEW COLLECTION</p>
