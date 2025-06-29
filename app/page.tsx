@@ -1,4 +1,4 @@
-import Button from "@/app/components/Button";
+import Button from "@/components/design components/Button";
 
 
 export default function Page() {

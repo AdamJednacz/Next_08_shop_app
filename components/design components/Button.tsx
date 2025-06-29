@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from "@/app/components/header.module.css";
+import classes from "@/components/design components/header.module.css";
 
 type ButtonProps = {
     text: string;
