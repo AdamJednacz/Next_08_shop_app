@@ -74,4 +74,8 @@
 
 .type{
     cursor: pointer;
+    transition: all ease 0.4s;
+}
+.type:hover{
+    scale: 1.2;
 }

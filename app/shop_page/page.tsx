@@ -9,9 +9,7 @@ const Page = () => {
 
     return (
         <>
-        <h1 className={classes.h1}>
-           Shop
-        </h1>
+
             <div className={classes.container}>
             <div className={classes.items}>
                 <Filters/>

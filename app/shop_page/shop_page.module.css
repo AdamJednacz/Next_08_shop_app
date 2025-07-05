@@ -2,12 +2,9 @@
 
     margin: 0 auto;
     max-width: 90%;
+    margin-top: 64px;
 }
 
 .items{
     display: flex;
-}
-
-.h1{
-    text-align: center;
 }
