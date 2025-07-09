@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import LayoutWrapper from "@/components/LayoutWrapper";
 import "./globals.css";
-import Header from "@/components/design components/Header";
-
+import Header from "@/components/design components/header/Header";
+import '@ant-design/v5-patch-for-react-19';
 
 export const metadata: Metadata = {
   title: "Create Next App",

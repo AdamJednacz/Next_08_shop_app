@@ -1,9 +1,4 @@
 
-export interface Size {
-    value:number;
-    unit:"S" | "M" | "L" | "XL"
-}
-
 
 
 
@@ -11,7 +6,10 @@ export interface Product {
     id: number;
     name: string;
     price: number
-    size: Size;
+    size: {
+        quantity:number;
+        unit:"S" | "M" | "L" | "XL"
+    };
     material : string
     color: string;
     clothes_type:"T-shirt"| "Shirt" | "Hat" | "Trousers" | "Hoodie"
@@ -23,7 +21,10 @@ export interface SoldProduct {
     id: number;
     name: string;
     price: number;
-    size:Size;
+    size:  {
+        value:number;
+        unit:"S" | "M" | "L" | "XL"
+    };
     buyer:Buyer
     material : string
 }

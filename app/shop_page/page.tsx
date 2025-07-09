@@ -1,8 +1,8 @@
 
 import classes from "./shop_page.module.css"
 import {getProducts} from "@/lib/products";
-import Filters from "@/components/shop_components/Filters";
-import Products from "@/components/shop_components/Products";
+import Filters from "@/components/shop_components/fillters/Filters";
+import Products from "@/components/shop_components/products/Products";
 const Page = () => {
 
 

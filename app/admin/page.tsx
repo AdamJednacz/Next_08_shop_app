@@ -1,19 +1,22 @@
 import React from 'react';
-import AddProducts from "@/components/admin/AddProducts";
-import SoldProducts from "@/components/admin/SoldProducts";
-import createProduct from "@/app/actions/products";
-import Products from "@/components/shop_components/Products";
+import FormProduct from "@/components/admin/formProduct/FormProduct";
+import SoldProducts from "@/components/admin/soldProducts/SoldProducts";
+import createProduct from "@/app/actions/createProduct";
+import Products from "@/components/shop_components/products/Products";
 import classes from "./admin.module.css"
-import ProductsOnShop from "@/components/admin/ProductsOnShop";
+import ProductsOnShop from "@/components/admin/productsOnShop/ProductsOnShop";
+import { Row, Col } from "antd";
 
 const Page = () => {
     return (
-        <div>
-            <AddProducts action={createProduct}/>
-            <ProductsOnShop/>
-            <SoldProducts/>
+        <div className={classes.container} style={{padding: 24}}>
+
+
+                    <ProductsOnShop/>
+
+                    <SoldProducts/>
+
         </div>
     );
-};
-
+}
 export default Page;

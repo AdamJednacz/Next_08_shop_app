@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from "./header.module.css"
-import Button from "@/components/design components/Button";
+import Button from "@/components/design components/button/Button";
 
 const Header = () => {
     return (

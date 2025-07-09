@@ -10,7 +10,7 @@ function initDb(db: sql.Database) {
                                                 id INTEGER PRIMARY KEY,
                                                 name TEXT NOT NULL,
                                                 price INTEGER NOT NULL,
-                                                size_value INTEGER NOT NULL,
+                                                quantity INTEGER NOT NULL,
                                                 size_unit TEXT NOT NULL,
                                                 material TEXT NOT NULL,
                                                 color TEXT NOT NULL,
@@ -22,7 +22,7 @@ function initDb(db: sql.Database) {
     const stmt = db.prepare('SELECT COUNT(*) AS count FROM products');
     if (stmt.get().count === 0) {
         db.prepare(`
-            INSERT INTO products (name, price, size_value, size_unit, material,color,clothes_type)
+            INSERT INTO products (name, price, quantity, size_unit, material,color,clothes_type)
             VALUES (?, ?, ?, ?, ?,?,?)
         `).run('Koszulka', 200, 20, "L", "80% cotton","#44f444","T-shirt");
     }
@@ -40,7 +40,7 @@ initDb(db);
         name: row.name,
         price: row.price,
         size: {
-            value: row.size_value,
+            quantity: row.quantity,
             unit: row.size_unit as "S" | "M" | "L" | "XL"
         },
         material: row.material,
@@ -52,25 +52,54 @@ initDb(db);
 }
 
 
-export async function storeProducts(products: Products): Promise<void> {
+export async function storeProduct(product: Omit<Product, "id">): Promise<Product> {
     const insert = db.prepare(`
-        INSERT INTO products (name, price, size_value, size_unit, material,color,clothes_type)
-        VALUES (?, ?, ?, ?, ?,?,?)
+        INSERT INTO products (name, price, quantity, size_unit, material, color, clothes_type)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
     `);
 
-    const insertMany = db.transaction((products: Products) => {
-        for (const product of products) {
-            insert.run(
-                product.name,
-                product.price,
-                product.size.value,
-                product.size.unit,
-                product.material,
-                product.color,
-                product.clothes_type,
-            );
-        }
-    });
+    const info = insert.run(
+        product.name,
+        product.price,
+        product.size.quantity,
+        product.size.unit,
+        product.material,
+        product.color,
+        product.clothes_type,
+    );
 
-    insertMany(products);
+    return {
+        ...product,
+        id: Number(info.lastInsertRowid), // tutaj pobierasz id z bazy
+    };
+}
+export async function updateProduct(product: Product): Promise<void> {
+    const stmt = db.prepare(`
+        UPDATE products
+        SET 
+            name = ?, 
+            price = ?,
+            quantity = ?, 
+            size_unit = ?, 
+            material = ?, 
+            color = ?, 
+            clothes_type = ?
+        WHERE id = ?
+    `);
+
+    stmt.run(
+        product.name,
+        product.price,
+        product.size.quantity,
+        product.size.unit,
+        product.material,
+        product.color,
+        product.clothes_type,
+        product.id // krytyczne: id musi być przekazane
+    );
+}
+
+export async function deleteProductById(id: number): Promise<void> {
+    const stmt = db.prepare(`DELETE FROM products WHERE id = ?`);
+    stmt.run(id);
 }

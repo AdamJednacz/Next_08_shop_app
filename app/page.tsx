@@ -1,5 +1,5 @@
-import Button from "@/components/design components/Button";
-import Header from "@/components/design components/Header";
+import Button from "@/components/design components/button/Button";
+import Header from "@/components/design components/header/Header";
 
 
 export default function Page() {

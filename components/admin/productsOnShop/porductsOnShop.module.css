@@ -1,6 +1,7 @@
 .tableContainer {
     overflow-x: auto;
     margin: 1rem;
+    max-width: 900px;
 }
 
 .table {
@@ -26,3 +27,6 @@
   .table .delete span:hover {
       color: red;
  }
+.table td{
+
+}
