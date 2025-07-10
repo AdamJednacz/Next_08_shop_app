@@ -3,10 +3,12 @@ import React, { useState } from "react";
 import classes from "@/components/admin/productsOnShop/porductsOnShop.module.css";
 
 import { Product } from "../../../app/types/types";
-import { Modal } from "antd";
+import {Button, Modal} from "antd";
 import FormProduct from "@/components/admin/formProduct/FormProduct";
 import editProduct from "@/app/actions/editProduct";
 import createProduct from "@/app/actions/createProduct";
+import deleteProduct from "@/app/actions/deleteProduct";
+
 
 interface ProductsOnShopTableProps {
     products: Product[];
@@ -15,8 +17,8 @@ interface ProductsOnShopTableProps {
 const ProductsOnShopTable: React.FC<ProductsOnShopTableProps> = ({ products }) => {
     const [isOpen, setIsOpen] = useState(false); // modal
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null); // wybrany produkt
-    const [modalMode, setModalMode] = useState<"edit" | "add" | null>(null);
-    // 🔁 products state so we can live-update the table
+    const [modalMode, setModalMode] = useState<"edit" | "add" |"delete" | null>(null);
+
     const [localProducts, setLocalProducts] = useState<Product[]>(products ?? []);
 
     const handleOpenEditModal = (product: Product) => {
@@ -27,6 +29,11 @@ const ProductsOnShopTable: React.FC<ProductsOnShopTableProps> = ({ products }) =
     const handleOpenAddModal = () => {
         setSelectedProduct(null); // brak danych
         setModalMode("add");
+        setIsOpen(true);
+    };
+    const handleOpenDeleteModal = (product:Product) => {
+        setSelectedProduct(product); // brak danych
+        setModalMode("delete");
         setIsOpen(true);
     };
     const handleCloseModal = () => {
@@ -61,6 +68,21 @@ const ProductsOnShopTable: React.FC<ProductsOnShopTableProps> = ({ products }) =
         }
     };
 
+    const handleDeleteProduct = async () => {
+        if (!selectedProduct) return;
+
+
+        const res = await deleteProduct(selectedProduct.id);
+
+        if (res?.success) {
+            setLocalProducts((prevProducts) =>
+                prevProducts.filter((p) => p.id !== selectedProduct.id)
+            );
+            handleCloseModal();
+        } else {
+            console.error("Usuwanie nie powiodło się", res?.error);
+        }
+}
     return (
         <div>
             <h1>Produkty na sklepie</h1>
@@ -108,7 +130,7 @@ const ProductsOnShopTable: React.FC<ProductsOnShopTableProps> = ({ products }) =
                                     </span>
                             </td>
                             <td className={classes.delete}>
-                                <span className="material-symbols-outlined">delete</span>
+                                <span onClick={()=>handleOpenDeleteModal(product)} className="material-symbols-outlined">delete</span>
                             </td>
                         </tr>
                     ))}
@@ -121,18 +143,35 @@ const ProductsOnShopTable: React.FC<ProductsOnShopTableProps> = ({ products }) =
                 open={isOpen}
                 onCancel={handleCloseModal}
                 footer={null}
-                title={modalMode === "edit" ? "Edytuj produkt" : "Dodaj produkt"}
+                title={
+                    modalMode === "edit"
+                        ? "Edytuj produkt"
+                        : modalMode === "add"
+                            ? "Dodaj produkt"
+                            : "Usuń produkt"
+                }
             >
-                <FormProduct
-                    key={`${modalMode}-${selectedProduct?.id ?? "new"}`}
-                    name={modalMode === "edit" ? "product-form-edit" : "product-form-add"}
-                    values={modalMode === "edit" && selectedProduct ? selectedProduct : null}
-                    onSubmit={modalMode === "edit" ? handleEditProduct : handleAddProduct}
-                />
+                {modalMode === "delete" && selectedProduct ? (
+                    <div>
+                        <p>Czy na pewno chcesz usunąć produkt <strong>{selectedProduct.name}</strong>?</p>
+                        <div style={{ display: "flex", justifyContent: "flex-end", gap: "1rem", marginTop: "1rem" }}>
+                            <Button onClick={handleCloseModal}>Anuluj</Button>
+                            <Button  variant="solid" color="danger" onClick={handleDeleteProduct} >
+                                Usuń
+                            </Button>
+                        </div>
+                    </div>
+                ) : (
+                    <FormProduct
+                        key={`${modalMode}-${selectedProduct?.id ?? "new"}`}
+                        name={modalMode === "edit" ? "product-form-edit" : "product-form-add"}
+                        values={modalMode === "edit" && selectedProduct ? selectedProduct : null}
+                        onSubmit={modalMode === "edit" ? handleEditProduct : handleAddProduct}
+                    />
+                )}
             </Modal>
-            <Modal>
-                {/*dodać możliwosć usunięcia danego przedmiotu z bazy */}
-            </Modal>
+
+
         </div>
     );
 };
