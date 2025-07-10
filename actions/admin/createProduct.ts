@@ -1,7 +1,7 @@
 "use server"
 
 import {storeProduct, updateProduct} from "@/lib/products";
-import {Product} from "@/app/types/types";
+import {Product} from "../../types/types";
 
 
 
@@ -10,6 +10,6 @@ export default async function createProduct(data: Product): Promise<{ success: b
         const newProduct = await storeProduct(data);  // storeProduct zwraca produkt z id
         return { success: true, product: newProduct };
     } catch (error) {
-        return { success: false, error: error.message};
+        return { success: false, error: error instanceof Error ? error.message : "Unknown error"};
     }
 }

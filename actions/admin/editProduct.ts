@@ -1,7 +1,7 @@
 "use server"
 
 import { updateProduct } from "@/lib/products";
-import {Product} from "@/app/types/types";
+import {Product, ProductColor} from "../../types/types";
 
 export default async function editProduct(data: Product) {
     try {
@@ -24,7 +24,7 @@ export default async function editProduct(data: Product) {
                 unit: size.unit as "S" | "M" | "L" | "XL"
             },
             material: String(material),
-            color: String(color),
+            color: color as ProductColor,
             clothes_type: clothes_type as "T-shirt" | "Shirt" | "Hat" | "Trousers" | "Hoodie"
         };
 

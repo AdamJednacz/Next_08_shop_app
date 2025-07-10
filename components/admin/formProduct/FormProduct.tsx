@@ -2,7 +2,7 @@
 import { Form, Input, InputNumber, Select, Button, message } from "antd";
 import { useEffect } from "react";
 import classes from "./formProduct.module.css";
-import {Product} from "@/app/types/types";
+import {Product} from "../../../types/types";
 
 const { Option } = Select;
 
@@ -11,10 +11,25 @@ interface FormProductProps {
     values: Product | null;
     onSubmit: (data: any) => void;
     name: string;
+    onReset:React.MutableRefObject<() => void>;
 }
 
-const FormProduct:React.FC<FormProductProps> = ({  values , onSubmit,name }) => {
+const colorOptions = [
+    "#FF6C6C", "#FF7629", "#FFF06C", "#9BFF6C",
+    "#6CF6FF", "#6CFFDC", "#6CB9FF", "#6C7BFF",
+    "#B66CFF", "#FC6CFF", "#000000", "#F0f0f0"
+] as const;
+
+const FormProduct:React.FC<FormProductProps> = ({  onReset ,  values , onSubmit,name }) => {
     const [form] = Form.useForm();
+
+    useEffect(() => {
+        if (onReset) {
+            onReset.current = () => {
+                form.resetFields();
+            };
+        }
+    }, [onReset, form]);
 
     useEffect(() => {
         if (values) {
@@ -50,6 +65,7 @@ const FormProduct:React.FC<FormProductProps> = ({  values , onSubmit,name }) => 
 
         if (onSubmit) {
             onSubmit(finalData);
+
         } else {
             console.warn("No onSubmit or action passed.");
         }
@@ -61,6 +77,7 @@ const FormProduct:React.FC<FormProductProps> = ({  values , onSubmit,name }) => 
                 {values?.id ? "Edytuj produkt" : "Dodaj produkt"}
             </h2>
             <Form
+
                 form={form}
                 name={name}
                 className={classes.form}
@@ -111,7 +128,21 @@ const FormProduct:React.FC<FormProductProps> = ({  values , onSubmit,name }) => 
                     <Input placeholder="Material" />
                 </Form.Item>
                 <Form.Item name="color" className={classes.form_control}>
-                    <Input type="color" />
+                    <Select>
+                        {colorOptions.map((color) => (
+                            <Option key={color} value={color}>
+                                <div
+                                    style={{
+                                        width: "100%",
+                                        height: "24px",
+                                        backgroundColor: color,
+                                        border: "1px solid #ccc",
+                                        borderRadius: "4px",
+                                    }}
+                                />
+                            </Option>
+                        ))}
+                    </Select>
                 </Form.Item>
                 <Form.Item
                     name="price"

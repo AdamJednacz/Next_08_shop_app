@@ -1,13 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import React, {useRef, useState} from "react";
 import classes from "@/components/admin/productsOnShop/porductsOnShop.module.css";
 
-import { Product } from "../../../app/types/types";
+import { Product } from "../../../types/types";
 import {Button, Modal} from "antd";
 import FormProduct from "@/components/admin/formProduct/FormProduct";
-import editProduct from "@/app/actions/editProduct";
-import createProduct from "@/app/actions/createProduct";
-import deleteProduct from "@/app/actions/deleteProduct";
+import editProduct from "../../../actions/admin/editProduct";
+import createProduct from "../../../actions/admin/createProduct";
+import deleteProduct from "../../../actions/admin/deleteProduct";
 
 
 interface ProductsOnShopTableProps {
@@ -18,8 +18,10 @@ const ProductsOnShopTable: React.FC<ProductsOnShopTableProps> = ({ products }) =
     const [isOpen, setIsOpen] = useState(false); // modal
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null); // wybrany produkt
     const [modalMode, setModalMode] = useState<"edit" | "add" |"delete" | null>(null);
-
     const [localProducts, setLocalProducts] = useState<Product[]>(products ?? []);
+
+
+    const resetFormRef = useRef<() => void>(() => {});
 
     const handleOpenEditModal = (product: Product) => {
         setSelectedProduct(product);
@@ -41,7 +43,7 @@ const ProductsOnShopTable: React.FC<ProductsOnShopTableProps> = ({ products }) =
         setSelectedProduct(null);
         setModalMode(null);
     };
-    // obłsuga modala
+
 
 
     const handleAddProduct = async (data: Product) => {
@@ -50,6 +52,7 @@ const ProductsOnShopTable: React.FC<ProductsOnShopTableProps> = ({ products }) =
         if (res?.success && res.product) {
             setLocalProducts((prevProducts) => [...prevProducts, res.product!]);
             handleCloseModal();
+            resetFormRef.current();
         } else {
             console.error("Dodawanie nie powiodło się", res?.error);
         }
@@ -167,6 +170,7 @@ const ProductsOnShopTable: React.FC<ProductsOnShopTableProps> = ({ products }) =
                         name={modalMode === "edit" ? "product-form-edit" : "product-form-add"}
                         values={modalMode === "edit" && selectedProduct ? selectedProduct : null}
                         onSubmit={modalMode === "edit" ? handleEditProduct : handleAddProduct}
+                        onReset={resetFormRef}
                     />
                 )}
             </Modal>

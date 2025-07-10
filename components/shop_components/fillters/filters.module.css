@@ -41,41 +41,23 @@
 .color:hover{
     scale: 1.2;
 }
-.color1{
-    background-color: #FF6C6C;
-}
-.color2{
-    background-color:#FF7629 ;
-}
-.color3{
-    background-color:#FFF06C ;
-}
-.color4{
-    background-color:#9BFF6C ;
-}
-.color5{
-    background-color:#6CF6FF ;
-}
-.color6{
-    background-color:#6CFFDC ;
-}
-.color7{
-    background-color:#6CB9FF ;
-}
-.color8{
-    background-color:#6C7BFF ;
-}
-.color9{
-    background-color:#B66CFF ;
-}
-.color10{
-     background-color:#FC6CFF ;
- }
 
 .type{
     cursor: pointer;
     transition: all ease 0.4s;
 }
 .type:hover{
+    font-size: 24px;
+}
+
+ .activeSize{
+    border: solid #000 1px;
+    color: #ffffff;
+    background-color: #000000;
+}
+.activeColor{
     scale: 1.2;
+  }
+.activeType{
+    font-size: 24px;
 }

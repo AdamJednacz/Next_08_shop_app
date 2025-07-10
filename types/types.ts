@@ -1,4 +1,16 @@
-
+export type ProductColor =
+    | "#FF6C6C"
+    | "#FF7629"
+    | "#FFF06C"
+    | "#9BFF6C"
+    | "#6CF6FF"
+    | "#6CFFDC"
+    | "#6CB9FF"
+    | "#6C7BFF"
+    | "#B66CFF"
+    | "#FC6CFF"
+    | "#000000"
+    | "#F0f0f0";
 
 
 
@@ -11,7 +23,7 @@ export interface Product {
         unit:"S" | "M" | "L" | "XL"
     };
     material : string
-    color: string;
+    color: ProductColor;
     clothes_type:"T-shirt"| "Shirt" | "Hat" | "Trousers" | "Hoodie"
 }
 

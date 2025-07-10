@@ -12,6 +12,6 @@ export default async function deleteProduct(id:number): Promise<{ success: boole
         await deleteProductById(id)
         return { success: true };
     } catch (error) {
-        return { success: false, error: error.message};
+        return { success: false, error: error instanceof Error ? error.message : "Unknown error"};
     }
 }

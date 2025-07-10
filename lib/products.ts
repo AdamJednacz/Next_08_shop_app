@@ -1,5 +1,5 @@
 import sql from "better-sqlite3";
-import { Products, Product } from "@/app/types/types";
+import { Products, Product } from "../types/types";
 
 
 const db = new sql('products.db');
@@ -29,6 +29,7 @@ function initDb(db: sql.Database) {
 }
 
 initDb(db);
+
 
 
  export async function getProducts(): Promise<Products> {
