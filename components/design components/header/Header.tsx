@@ -6,9 +6,10 @@ import Button from "@/components/design components/button/Button";
 import {useUser} from "@/context/userContext";
 
 
+
 const Header =() => {
 
-    // const { user } = useUser();
+    const { user } = useUser();
 
 
     return (
@@ -20,18 +21,19 @@ const Header =() => {
                     <a href="/shop_page" className={classes.menu_item}>Shop</a>
                     <a className={classes.menu_item}>New Arrivals</a>
                     <a className={classes.menu_item}>Packages</a>
-                    {/*{user ? (*/}
-                    {/*    <>*/}
-                    {/*        {user.name} {user.surname}*/}
-                    {/*    </>*/}
-                    {/*) : (*/}
+                    {user ? (
+                        <>
+                           <p className={classes.menu_item}>{user.name} {user.surname}</p>
+                            <Button text={"Logout"}/>
+                        </>
+                    ) : (
                         <>
                             <a href="/login" className={`${classes.menu_item} ${classes.menu_item_last}`}>
                                 Sign in
                             </a>
                             <Button link={"register"} text={"Sign up"} />
                         </>
-                    {/*)}*/}
+                    )}
 
                 </div>
             </div>

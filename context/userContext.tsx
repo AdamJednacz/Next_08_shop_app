@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, Dispatch, SetStateAction } from 'react';
 import type { User } from '@/types/types';
-import {verifySession} from "@/lib/session";
+import {getSessionUser, verifySession} from "@/lib/session";
 
 type UserContextType = {
     user: User | null;
@@ -13,14 +13,16 @@ export const UserContext = createContext<UserContextType>(null);
 
 interface UserContextProviderProps {
     children: React.ReactNode;
-    initialUser?: User | null;
+    user?: User | null;
 }
 
-export default function UserContextProvider({ children, initialUser = null }: UserContextProviderProps) {
+export default function UserContextProvider({
+                                                children,
+                                                user: initialUser = null,
+                                            }: UserContextProviderProps) {
     const [user, setUser] = useState<User | null>(initialUser);
-
     return (
-        <UserContext.Provider value={{ user, setUser }}>
+        <UserContext.Provider value={{user, setUser}}>
             {children}
         </UserContext.Provider>
     );

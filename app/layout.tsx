@@ -16,7 +16,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-    // const user = await getSessionUser();
+    const user = await getSessionUser();
   return (
       <html lang="en">
       <head>
@@ -25,9 +25,9 @@ export default async function RootLayout({
 
       </head>
       <body>
-      {/*<UserContextProvider initialUser={user}>*/}
-          <LayoutWrapper>{children}</LayoutWrapper>
-      {/*</UserContextProvider>*/}
+      <UserContextProvider user={user}>
+          <LayoutWrapper  >{children}</LayoutWrapper>
+      </UserContextProvider>
       </body>
       </html>
   );

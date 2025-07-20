@@ -58,16 +58,16 @@ export async function verifySession( ){
 
 }
 
-export async function getSessionUser() {
-    const session = await verifySession();
+export async function getSessionUser(): Promise<User | null> {
+    const sessionCookie = (await cookies()).get(cookieConfig.name)?.value;
+    const session = await decrypt(sessionCookie ?? "");
 
-    if (typeof session.userId !== 'number') {
-        throw new Error("userId is not a number");
+    if (!session?.userId || typeof session.userId !== "number") {
+        return null; // ⛔ NIE redirectuj – pozwól frontendowi zareagować
     }
 
-    const user = getUserById(session.userId);
-
-    return  user ;
+    const user = await getUserById(session.userId);
+    return user ?? null;
 }
 
 
