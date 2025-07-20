@@ -1,8 +1,16 @@
-import React from 'react';
+'use client'
+
+import React, {useEffect, useState} from 'react';
 import classes from "./header.module.css"
 import Button from "@/components/design components/button/Button";
+import {useUser} from "@/context/userContext";
 
-const Header = () => {
+
+const Header =() => {
+
+    // const { user } = useUser();
+
+
     return (
         <header className={classes.header}>
             <div className={classes.container}>
@@ -12,7 +20,19 @@ const Header = () => {
                     <a href="/shop_page" className={classes.menu_item}>Shop</a>
                     <a className={classes.menu_item}>New Arrivals</a>
                     <a className={classes.menu_item}>Packages</a>
-                    <a className={`${classes.menu_item} ${classes.menu_item_last}`}>Sign in</a>                    <Button text={"Sign up"}/>
+                    {/*{user ? (*/}
+                    {/*    <>*/}
+                    {/*        {user.name} {user.surname}*/}
+                    {/*    </>*/}
+                    {/*) : (*/}
+                        <>
+                            <a href="/login" className={`${classes.menu_item} ${classes.menu_item_last}`}>
+                                Sign in
+                            </a>
+                            <Button link={"register"} text={"Sign up"} />
+                        </>
+                    {/*)}*/}
+
                 </div>
             </div>
         </header>

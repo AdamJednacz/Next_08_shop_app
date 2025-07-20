@@ -54,3 +54,13 @@ export interface Buyer {
 
 export type Products = Product[];
 export type SoldProducts = SoldProduct[];
+
+
+export interface User {
+    id: number;
+    email: string;
+    password: string;
+    role: string;
+    name: string;
+    surname: string;
+}

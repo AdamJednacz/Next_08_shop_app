@@ -123,7 +123,7 @@ const ProductsOnShopTable: React.FC<ProductsOnShopTableProps> = ({ products }) =
                                     }}
                                 ></div>
                             </td>
-                            <td>{product.price}</td>
+                            <td>{product.price} PLN</td>
                             <td>
                                     <span
                                         onClick={() => handleOpenEditModal(product)}

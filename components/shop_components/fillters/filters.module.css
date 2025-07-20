@@ -42,12 +42,31 @@
     scale: 1.2;
 }
 
-.type{
-    cursor: pointer;
-    transition: all ease 0.4s;
+.types{
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
 }
-.type:hover{
-    font-size: 24px;
+.type{
+    font-size: 16px;
+    margin: 8px 0;
+    cursor: pointer;
+    color: #8A8A8A;
+    transition: all ease 0.4s;
+    position: relative;
+}
+.type:before{
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background: #8A8A8A;
+    transition: width 0.3s ease;
+}
+.type:hover::before {
+    width: 100%;
 }
 
  .activeSize{
@@ -58,6 +77,42 @@
 .activeColor{
     scale: 1.2;
   }
-.activeType{
-    font-size: 24px;
+.activeType::before {
+    width: 100%;
+}
+
+.pricesFilters{
+    display: flex;
+    flex-direction: row;
+    gap:16px
+}
+.pricesButtons{
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start ;
+    gap: 16px;
+}
+.pricesButtons button{
+    cursor: pointer;
+    border: none;
+    color: #8A8A8A;
+    background-color: transparent;
+    font-size: 16px;
+    position: relative;
+}
+.pricesButtons button::before {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background: #8A8A8A;
+    transition: width 0.3s ease;
+}
+.pricesButtons button:hover::before {
+    width: 100%;
+}
+.pricesButtons > button .active::before {
+    width: 100%;
 }

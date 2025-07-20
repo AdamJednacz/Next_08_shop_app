@@ -1,7 +1,7 @@
 "use server"
 import classes from "./shop_page.module.css";
 import { getProducts } from "@/lib/products";
-import Filters from "@/components/shop_components/fillters/Filters";
+import FiltersComponent from "@/components/shop_components/fillters/FiltersComponent";
 import Products from "@/components/shop_components/products/Products";
 import React, { Suspense } from "react";
 import FiltersWrapper from "@/components/shop_components/FiltersWrapper";

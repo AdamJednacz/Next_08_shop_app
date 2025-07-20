@@ -1,6 +1,6 @@
 "use client";
 import { Form, Input, InputNumber, Select, Button, message } from "antd";
-import { useEffect } from "react";
+import { RefObject, useEffect} from "react";
 import classes from "./formProduct.module.css";
 import {Product} from "../../../types/types";
 
@@ -11,7 +11,7 @@ interface FormProductProps {
     values: Product | null;
     onSubmit: (data: any) => void;
     name: string;
-    onReset:React.MutableRefObject<() => void>;
+    onReset:RefObject<() => void>;
 }
 
 const colorOptions = [
@@ -55,11 +55,11 @@ const FormProduct:React.FC<FormProductProps> = ({  onReset ,  values , onSubmit,
             name: values.name,
             price: values.price,
             material: values.material,
-            color: values.color, // mapuj poprawnie
-            clothes_type: values.clothes_type, // mapuj poprawnie
+            color: values.color,
+            clothes_type: values.clothes_type,
             size: {
-                unit: values.size_unit, // mapuj poprawnie
-                quantity: values.quantity, // mapuj poprawnie
+                unit: values.size_unit,
+                quantity: values.quantity,
             },
         };
 
@@ -103,7 +103,7 @@ const FormProduct:React.FC<FormProductProps> = ({  onReset ,  values , onSubmit,
                     <InputNumber placeholder="Quantity" min={1} style={{ width: "100%" }} />
                 </Form.Item>
                 <Form.Item name="size_unit" className={classes.form_control}>
-                    <Select>
+                    <Select placeholder="Size">
                         {["S", "M", "L", "XL"].map((size) => (
                             <Option key={size} value={size}>
                                 {size}
@@ -112,7 +112,7 @@ const FormProduct:React.FC<FormProductProps> = ({  onReset ,  values , onSubmit,
                     </Select>
                 </Form.Item>
                 <Form.Item name="clothes_type" className={classes.form_control}>
-                    <Select>
+                    <Select placeholder="Clothes type">
                         {["T-shirt", "Shirt", "Hat", "Trousers", "Hoodie"].map((type) => (
                             <Option key={type} value={type}>
                                 {type}
@@ -128,7 +128,7 @@ const FormProduct:React.FC<FormProductProps> = ({  onReset ,  values , onSubmit,
                     <Input placeholder="Material" />
                 </Form.Item>
                 <Form.Item name="color" className={classes.form_control}>
-                    <Select>
+                    <Select placeholder="Color">
                         {colorOptions.map((color) => (
                             <Option key={color} value={color}>
                                 <div

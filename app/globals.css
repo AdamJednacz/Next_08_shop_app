@@ -93,3 +93,6 @@ button{
     transform: scale(1.05)
 }
 
+* {
+    box-sizing: border-box;
+}
