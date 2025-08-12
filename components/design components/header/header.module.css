@@ -5,6 +5,7 @@
     max-width: 90%;
     display: flex;
     justify-content: space-between;
+
 }
 .logo{
     font-size: 32px;
@@ -20,7 +21,7 @@
 
 }
 .menu_item{
-    margin: 0 32px;
+    margin: 0 48px;
     font-size: 1rem;
     cursor: pointer;
     color: #484848;
@@ -61,4 +62,45 @@
     background: #ffffff;
     color: #000;
     border: 1px solid #000000;
+}
+.menu_icons{
+    display: flex;
+    align-items: center;
+}
+.menu_icon{
+    margin: 0 16px;
+    font-size: 24px;
+    cursor: pointer;
+}
+.menu_icon:hover{
+ color: green;
+}
+.menu_dropdown_item{
+    font-family: 'Poppins', sans-serif;
+
+}
+.menu_dropdown_item a{
+
+    color: unset;
+}
+.menu_dropdown_item button{
+    text-align: left;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    border: none;
+}
+.menu_dropdown_item_icon{
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+}
+
+.menu_dropdown_item_icon_3{
+    margin-right: 6px;
+    width: 16px;
+    height: 16px;
 }

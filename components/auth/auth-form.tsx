@@ -4,6 +4,8 @@ import React, {startTransition, useActionState, useEffect} from "react";
 import classes from "./authForm.module.css"
 
 import {auth, signup, SignupFormState} from "@/actions/auth/auth-action"
+import {redirect} from "next/navigation";
+import {useRouter} from "next/router";
 
 interface SignupData {
     email: string;
@@ -36,7 +38,12 @@ export default function AuthForm({mode}:AuthFormProps) {
         auth.bind(null, mode),
         initialState
     );
-    console.log("STATE", state);
+    useEffect(() => {
+        if (state.success) {
+            window.location.href = "/"; // ⬅️ wymusza pełne przeładowanie, kontekst się zaktualizuje
+        }
+    }, [state.success]);
+
 
     const title = mode === "signup" ? "Sign up" : "Sign in";
     return (

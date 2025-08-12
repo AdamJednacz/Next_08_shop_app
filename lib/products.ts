@@ -1,7 +1,16 @@
 import sql from "better-sqlite3";
-import { Products, Product } from "../types/types";
+import {Products, Product, ProductColor} from "../types/types";
 
-
+export type ProductRow = {
+    id: number;
+    name: string;
+    price: number;
+    quantity: number;
+    size_unit: "S" | "M" | "L" | "XL";
+    material: string;
+    color: ProductColor;
+    clothes_type: "T-shirt" | "Shirt" | "Hat" | "Trousers" | "Hoodie";
+};
 const db = new sql('products.db');
 
 function initDb(db: sql.Database) {
@@ -103,4 +112,26 @@ export async function updateProduct(product: Product): Promise<void> {
 export async function deleteProductById(id: number): Promise<void> {
     const stmt = db.prepare(`DELETE FROM products WHERE id = ?`);
     stmt.run(id);
+}
+
+export async function getProductById(id: number): Promise<Product>  {
+    const stmt = db.prepare(`SELECT * FROM products WHERE id = ?`);
+    const row = stmt.get(id) as ProductRow ;
+
+
+
+    const product: Product = {
+        id: row.id,
+        name: row.name,
+        price: row.price,
+        size: {
+            quantity: row.quantity,
+            unit: row.size_unit,
+        },
+        material: row.material,
+        color: row.color,
+        clothes_type: row.clothes_type,
+    };
+
+    return product;
 }

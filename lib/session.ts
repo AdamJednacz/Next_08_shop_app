@@ -16,7 +16,7 @@ if (!rawKey) {
 const cookieConfig = {
     name:'session',
     options:{httpOnly:true,secure:true,sameSite:'lax' as const,path:'/'},
-    duration:24*60*60*1000,
+    duration:24*60*60*100,
 }
 
 export async function encrypt(payload:JWTPayload):Promise<string>{
@@ -54,7 +54,7 @@ export async function verifySession( ){
     if(!session?.userId){
         redirect("/login")
     }
-    return {userId:session.userId}
+    return {userId:session.userId, session:session}
 
 }
 
@@ -63,7 +63,7 @@ export async function getSessionUser(): Promise<User | null> {
     const session = await decrypt(sessionCookie ?? "");
 
     if (!session?.userId || typeof session.userId !== "number") {
-        return null; // ⛔ NIE redirectuj – pozwól frontendowi zareagować
+        return null;
     }
 
     const user = await getUserById(session.userId);
@@ -72,7 +72,14 @@ export async function getSessionUser(): Promise<User | null> {
 
 
 export async function deleteSession() {
+    const {session} = await verifySession()
+    if (!session) {
+        return {
+            error:'Unauthorized'
+        }
+    }
+
     (await cookies()).delete(cookieConfig.name)
-    redirect("/login")
+
 
 }

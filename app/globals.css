@@ -96,3 +96,37 @@ button{
 * {
     box-sizing: border-box;
 }
+.ant-pagination-item a {
+    color: #000; /* czarny */
+}
+
+.ant-pagination-item-active a {
+    color: #000;
+    font-weight: 600;
+    border-color: #000;
+}
+
+.ant-pagination-prev .ant-pagination-item-link,
+.ant-pagination-next .ant-pagination-item-link {
+    color: #000;
+}
+:where(.css-dev-only-do-not-override-pjilya).ant-pagination .ant-pagination-item-active a {
+    color: #000;
+
+}
+:where(.css-dev-only-do-not-override-pjilya).ant-pagination .ant-pagination-item-active a:hover {
+    color: #000;
+
+}
+:where(.css-dev-only-do-not-override-pjilya).ant-pagination .ant-pagination-item-active {
+    font-weight: 600;
+    background-color: #ffffff;
+    border-color: #000;
+}
+:where(.css-dev-only-do-not-override-pjilya).ant-pagination .ant-pagination-item-active:hover {
+    font-weight: 600;
+    background-color: #ffffff;
+    border-color: #000;
+}
+
+

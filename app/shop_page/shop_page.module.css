@@ -3,8 +3,10 @@
     margin: 0 auto;
     max-width: 90%;
     margin-top: 64px;
+
 }
 
 .items{
     display: flex;
 }
+

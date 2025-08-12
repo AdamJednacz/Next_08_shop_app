@@ -3,7 +3,7 @@
 import bcrypt from "bcrypt";
 import {createUser, getUserByEmail} from "@/lib/users";
 import {redirect} from "next/navigation";
-import {createSession} from "@/lib/session";
+import {createSession, deleteSession, verifySession} from "@/lib/session";
 export interface SignupFormState {
     success: boolean;
     errors?: {
@@ -118,9 +118,7 @@ export async function signin(prevState: SignupFormState, formData: FormData): Pr
 
     await createSession(existingUser.id);
 
-    // ✅ redirect przerwie flow, ale dodaj "return" na wszelki wypadek
 
-    redirect("/shop_page");
     return {
         success: true,
         errors: {},
@@ -131,9 +129,16 @@ export async function signin(prevState: SignupFormState, formData: FormData): Pr
 
 
 export async function auth(mode:string,prevState:SignupFormState,formData:FormData){
-    console.log("MODE:", mode); // ⬅️ dodaj to!
+    console.log("MODE:", mode);
     if(mode === 'signin'){
        return await signin(prevState,formData);
     }
     return await signup(prevState,formData);
 }
+
+export async function logout(){
+    await deleteSession()
+    redirect('/')
+}
+
+

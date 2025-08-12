@@ -3,6 +3,7 @@ import { Product as ProductType } from "../../../types/types";
 import classes from "./product.module.css"; // upewnij się, że ścieżka jest poprawna
 
 const Product: React.FC<ProductType> = ({ id, name, price, size , material }) => {
+
     return (
         <div className={classes.product}>
             <div className={classes.future_img}></div>

@@ -26,7 +26,7 @@ export type FiltersType = {
          sortPrice: null,
      });
 
-     console.log(filters)
+
     return (
         <>
             <FiltersComponent
